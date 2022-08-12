@@ -31,7 +31,8 @@ const ShadowMap = () => {
 
     const shadow = new XYZ({
       // attributions: attributions,
-      url: 'https://storage.googleapis.com/chicago_shadow_map/chi-dec-21/{z}/{x}/{y}.png',
+      // url: 'https://storage.googleapis.com/chicago_shadow_map/chi-dec-21/{z}/{x}/{y}.png',
+      url: `/assets/chicago-shadows/chi-dec-21/{z}/{x}/{y}.png`,
       tileGrid: createXYZ({ tileSize: 256, minZoom: 15, maxZoom: 15 }),
       // maxZoom: 15,
       crossOrigin: 'anonymous',
@@ -77,7 +78,7 @@ const ShadowMap = () => {
     map?.setTarget(mapElement?.current);
 
     setMap(map);
-  }, []);
+  }, [map]);
 
   return (
     <div className="container w-full h-screen">
