@@ -31,11 +31,11 @@ const ShadowMap = () => {
 
     const shadow = new XYZ({
       // attributions: attributions,
-      // url: 'https://storage.googleapis.com/chicago_shadow_map/chi-dec-21/{z}/{x}/{y}.png',
-      url: `/assets/chicago-shadows/chi-dec-21/{z}/{x}/{y}.png`,
-      tileGrid: createXYZ({ tileSize: 256, minZoom: 15, maxZoom: 15 }),
+      // url: `/assets/new-york-shadows/midtown/08/{z}/{x}/{y}.png`,
+      url: `/assets/midtown/01/{z}/{x}/{y}.png`,
+      tileGrid: createXYZ({ tileSize: 256, minZoom: 16, maxZoom: 16 }),
       // maxZoom: 15,
-      crossOrigin: 'anonymous',
+      // crossOrigin: 'anonymous',
     });
     const raster = new RasterSource({
       sources: [shadow],
@@ -47,7 +47,7 @@ const ShadowMap = () => {
        */
       operation: function (pixels: any): any {
         const pixel = [0, 0, 0, 0];
-        const val = pixels[0][0] / 255.0;
+        const val = pixels[0][3] / 255.0;
         pixel[0] = 66 * val;
         pixel[1] = 113 * val;
         pixel[2] = 143 * val;
@@ -71,8 +71,8 @@ const ShadowMap = () => {
     ]);
     map?.setView(
       new View({
-        center: transform([-87.6298, 41.8781], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 15,
+        center: transform([-73.981934, 40.761821], 'EPSG:4326', 'EPSG:3857'),
+        zoom: 16,
       }),
     );
     map?.setTarget(mapElement?.current);
