@@ -18,33 +18,32 @@ const ShadowMap = () => {
       }),
     ],
     view: new View({
-      center: [0, 0],
-      zoom: 0,
+      center: transform([-73.981934, 40.761821], 'EPSG:4326', 'EPSG:3857'),
+      zoom: 16,
     }),
   });
 
   const mapElement = useRef<HTMLDivElement | null>(null);
   const [map, setMap] = useState<Map | undefined>(initialMap);
+  const [mousePosition, setMousePosition] = useState<any>();
+  const [layerJan, setLayerJan] = useState<any>();
+
+  const handleMapMove = (event: any) => {
+    setMousePosition(event.pixel);
+  };
 
   useEffect(() => {
     if (!mapElement?.current) return;
 
-    const shadow = new XYZ({
-      // attributions: attributions,
-      // url: `/assets/new-york-shadows/midtown/08/{z}/{x}/{y}.png`,
-      url: `/assets/midtown/01/{z}/{x}/{y}.png`,
-      tileGrid: createXYZ({ tileSize: 256, minZoom: 16, maxZoom: 16 }),
-      // maxZoom: 15,
-      // crossOrigin: 'anonymous',
-    });
-    const raster = new RasterSource({
-      sources: [shadow],
-      /**
-       * Run calculations on pixel data.
-       * @param {Array} pixels List of pixels (one per source).
-       * @param {Object} data User data object.
-       * @return {Array} The output pixel.
-       */
+    const source_jan = new RasterSource({
+      sources: [
+        new XYZ({
+          url: `/assets/midtown/jan/{z}/{x}/{y}.png`,
+          tileGrid: createXYZ({ tileSize: 256, minZoom: 16, maxZoom: 16 }),
+          crossOrigin: 'anonymous',
+          maxZoom: 16,
+        }),
+      ],
       operation: function (pixels: any): any {
         const pixel = [0, 0, 0, 0];
         const val = pixels[0][3] / 255.0;
@@ -55,36 +54,57 @@ const ShadowMap = () => {
         return pixel;
       },
     });
-    const raster_layer = new ImageLayer({
-      source: raster,
+
+    const layer_jan = new ImageLayer({
+      source: source_jan,
       zIndex: 1,
     });
+    setLayerJan(layer_jan);
 
     map?.setLayers([
       new TileLayer({
         source: new XYZ({
           url: 'https://maps.geoapify.com/v1/tile/positron/{z}/{x}/{y}.png?&apiKey=c4ef9c97bd094afeabe52308c38f3e9a',
-          // 'https://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+          crossOrigin: 'anonymous',
         }),
       }),
-      raster_layer,
     ]);
-    map?.setView(
-      new View({
-        center: transform([-73.981934, 40.761821], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 16,
-      }),
-    );
+    map?.addLayer(layer_jan);
     map?.setTarget(mapElement?.current);
-
+    map?.on('pointermove', handleMapMove);
     setMap(map);
+
+    return () => {
+      if (map) {
+        map.removeLayer(layer_jan);
+      }
+    };
   }, [map]);
 
+  useEffect(() => {
+    if (!layerJan) return;
+
+    layerJan.on('postrender', (event: any) => {
+      const ctx = event.context;
+      const pixelRatio = event.frameState.pixelRatio;
+
+      if (mousePosition) {
+        const x = mousePosition[0] * pixelRatio;
+        const y = mousePosition[1] * pixelRatio;
+        const data = ctx.getImageData(x, y, 1, 1).data;
+        const valueWinter = (data[3] / 255) * 360;
+        console.log('percent', (valueWinter * 100) / 360);
+        // this.values[0].value = valueWinter;
+        // this.values[0].percent = (valueWinter * 100) / 360;
+      }
+    });
+  }, [layerJan, mousePosition]);
+
   return (
-    <div className="container w-full h-screen">
+    <div className="w-full h-screen">
       <div ref={mapElement} className="w-full h-full map" />
     </div>
   );
 };
 
-export default ShadowMap;
+export default React.memo(ShadowMap);
