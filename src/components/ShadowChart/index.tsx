@@ -7,8 +7,8 @@ const ShadowChart = () => {
 
   console.log(shadowStore);
 
-  // const percentage = shadowStore[0].percentage;
-  const percentage = 50;
+  const percentage = shadowStore[0].percentage;
+  // const percentage = 50;
 
   return (
     <div>
