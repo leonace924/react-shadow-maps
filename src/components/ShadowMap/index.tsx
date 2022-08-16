@@ -33,6 +33,7 @@ const ShadowMap = () => {
 
   const handleMapMove = (event: any) => {
     setMousePosition(event.pixel);
+    map?.render();
     // const pixel_value = monthsLayer?.[0].getData(event.pixel)?.toString();
     // console.log('pixel_value', pixel_value);
     // if (!pixel_value) return;
@@ -76,7 +77,7 @@ const ShadowMap = () => {
       ],
       operation: function (pixels: any): any {
         const pixel = [0, 0, 0, 0];
-        const val = pixels[0][0] / 255.0;
+        const val = pixels[0][3] / 255.0;
         pixel[0] = 66 * val;
         pixel[1] = 113 * val;
         pixel[2] = 143 * val;
@@ -127,11 +128,11 @@ const ShadowMap = () => {
       if (mousePosition) {
         const x = mousePosition[0] * pixelRatio;
         const y = mousePosition[1] * pixelRatio;
+        console.log(x, y);
         const data = ctx.getImageData(x, y, 1, 1).data;
-        console.log('data', data);
-
+        console.log('--data', data);
         const value = (data[3] / 255) * 360;
-        console.log('value', value);
+
         updateShadow({
           month: 'January',
           minutes: value,
