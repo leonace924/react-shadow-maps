@@ -78,7 +78,6 @@ const ShadowMap = () => {
       operation: function (pixels: any): any {
         const pixel = [0, 0, 0, 0];
         const val = pixels[0][3] / 255.0;
-        console.log('pixels', pixels);
         pixel[0] = 66 * val;
         pixel[1] = 113 * val;
         pixel[2] = 143 * val;
