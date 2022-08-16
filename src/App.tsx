@@ -1,11 +1,12 @@
 import React from 'react';
 import ShadowMap from 'components/ShadowMap';
 
-function App() {
+const App = () => {
   return (
-    <div className="p-8 bg-gray-200 border">
+    <div className="bg-gray-200">
       <ShadowMap />
     </div>
   );
-}
+};
+
 export default App;
