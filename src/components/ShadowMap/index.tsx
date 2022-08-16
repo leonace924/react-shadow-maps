@@ -9,8 +9,11 @@ import { transform } from 'ol/proj';
 import { createXYZ } from 'ol/tilegrid';
 import XYZ from 'ol/source/XYZ';
 import 'ol/ol.css';
+import { useGlobalStore } from 'store';
 
 const ShadowMap = () => {
+  const updateShadow = useGlobalStore((state) => state.updateData);
+
   const initialMap = new Map({
     layers: [
       new TileLayer({
@@ -26,7 +29,7 @@ const ShadowMap = () => {
   const mapElement = useRef<HTMLDivElement | null>(null);
   const [map, setMap] = useState<Map | undefined>(initialMap);
   const [mousePosition, setMousePosition] = useState<any>();
-  const [layerJan, setLayerJan] = useState<any>();
+  const [monthsLayer, setMonthsLayer] = useState<any[]>();
 
   const handleMapMove = (event: any) => {
     setMousePosition(event.pixel);
@@ -55,11 +58,35 @@ const ShadowMap = () => {
       },
     });
 
+    const source_feb = new RasterSource({
+      sources: [
+        new XYZ({
+          url: `/assets/midtown/feb/{z}/{x}/{y}.png`,
+          tileGrid: createXYZ({ tileSize: 256, minZoom: 16, maxZoom: 16 }),
+          crossOrigin: 'anonymous',
+          maxZoom: 16,
+        }),
+      ],
+      operation: function (pixels: any): any {
+        const pixel = [0, 0, 0, 0];
+        const val = pixels[0][3] / 255.0;
+        pixel[0] = 66 * val;
+        pixel[1] = 113 * val;
+        pixel[2] = 143 * val;
+        pixel[3] = 255 * val;
+        return pixel;
+      },
+    });
+
     const layer_jan = new ImageLayer({
       source: source_jan,
       zIndex: 1,
     });
-    setLayerJan(layer_jan);
+    const layer_feb = new ImageLayer({
+      source: source_feb,
+      zIndex: 1,
+    });
+    setMonthsLayer([layer_jan, layer_feb]);
 
     map?.setLayers([
       new TileLayer({
@@ -69,22 +96,24 @@ const ShadowMap = () => {
         }),
       }),
     ]);
-    map?.addLayer(layer_jan);
     map?.setTarget(mapElement?.current);
+    map?.addLayer(layer_jan);
+    map?.addLayer(layer_feb);
     map?.on('pointermove', handleMapMove);
     setMap(map);
 
     return () => {
       if (map) {
         map.removeLayer(layer_jan);
+        map.removeLayer(layer_feb);
       }
     };
   }, [map]);
 
   useEffect(() => {
-    if (!layerJan) return;
+    if (!monthsLayer?.length) return;
 
-    layerJan.on('postrender', (event: any) => {
+    monthsLayer[0].on('postrender', (event: any) => {
       const ctx = event.context;
       const pixelRatio = event.frameState.pixelRatio;
 
@@ -92,13 +121,34 @@ const ShadowMap = () => {
         const x = mousePosition[0] * pixelRatio;
         const y = mousePosition[1] * pixelRatio;
         const data = ctx.getImageData(x, y, 1, 1).data;
-        const valueWinter = (data[3] / 255) * 360;
-        console.log('percent', (valueWinter * 100) / 360);
-        // this.values[0].value = valueWinter;
-        // this.values[0].percent = (valueWinter * 100) / 360;
+        const value = (data[3] / 255) * 360;
+
+        updateShadow({
+          month: 'January',
+          minutes: value,
+          percentage: Number(((value * 100) / 360).toFixed(2)),
+        });
       }
     });
-  }, [layerJan, mousePosition]);
+
+    monthsLayer[1].on('postrender', (event: any) => {
+      const ctx = event.context;
+      const pixelRatio = event.frameState.pixelRatio;
+
+      if (mousePosition) {
+        const x = mousePosition[0] * pixelRatio;
+        const y = mousePosition[1] * pixelRatio;
+        const data = ctx.getImageData(x, y, 1, 1).data;
+        const value = (data[3] / 255) * 360;
+
+        updateShadow({
+          month: 'February',
+          minutes: value,
+          percentage: Number(((value * 100) / 360).toFixed(2)),
+        });
+      }
+    });
+  }, [monthsLayer, mousePosition, updateShadow]);
 
   return (
     <div className="w-full h-screen">
