@@ -68,7 +68,7 @@ const ShadowMap = () => {
   const imageLayerOption = useMemo(() => {
     return {
       zIndex: 1,
-      opacity: 0.001,
+      opacity: 0.1,
     };
   }, []);
 
