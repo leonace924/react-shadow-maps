@@ -20,7 +20,9 @@ const ShadowMap = () => {
     ],
     view: new View({
       center: transform([-73.981934, 40.761821], 'EPSG:4326', 'EPSG:3857'),
-      zoom: 16,
+      zoom: 15,
+      minZoom: 15,
+      maxZoom: 15,
     }),
   });
 
