@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -9,6 +9,7 @@ import { transform } from 'ol/proj';
 import { createXYZ } from 'ol/tilegrid';
 import XYZ from 'ol/source/XYZ';
 import { useGlobalStore } from 'store';
+import { monthsData } from 'constant/months';
 import 'ol/ol.css';
 
 const ShadowMap = () => {
@@ -33,11 +34,13 @@ const ShadowMap = () => {
   const getShadowTime = useCallback(
     (pixel_value: any, month: string) => {
       const myArray = pixel_value.split(',');
-      const shadow_time = (parseInt(myArray[3]) / 255) * 360;
+      const index = Object.keys(monthsData).findIndex((item) => item === month) ?? 0;
+      const mins = Object.values(monthsData)[index] * 60;
+      const shadow_time = (parseInt(myArray[3]) / 255) * mins;
       updateShadow({
         month: month,
         minutes: shadow_time,
-        percentage: Number(((shadow_time * 100) / 360).toFixed(2)),
+        percentage: Number(((shadow_time * 100) / mins).toFixed(2)),
       });
     },
     [updateShadow],
@@ -62,10 +65,12 @@ const ShadowMap = () => {
     };
   };
 
-  const imageLayerOption = {
-    zIndex: 1,
-    opacity: 0.1,
-  };
+  const imageLayerOption = useMemo(() => {
+    return {
+      zIndex: 1,
+      opacity: 0.1,
+    };
+  }, []);
 
   useEffect(() => {
     if (!mapElement?.current) return;
@@ -309,7 +314,7 @@ const ShadowMap = () => {
         map?.removeLayer(layer_dec);
       }
     };
-  }, [getShadowTime, map]);
+  }, [getShadowTime, imageLayerOption, map]);
 
   return (
     <div className="w-full h-screen">
