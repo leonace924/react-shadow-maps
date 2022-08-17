@@ -62,6 +62,11 @@ const ShadowMap = () => {
     };
   };
 
+  const imageLayerOption = {
+    zIndex: 1,
+    opacity: 0.1,
+  };
+
   useEffect(() => {
     if (!mapElement?.current) return;
 
@@ -105,31 +110,112 @@ const ShadowMap = () => {
       ],
       operation: rasterFunction,
     });
+    const source_jun = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('jun'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
+
+    const source_jul = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('jul'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
+    const source_aug = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('aug'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
+
+    const source_sep = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('sep'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
+    const source_oct = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('oct'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
+    const source_nov = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('nov'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
+    const source_dec = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('dec'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
 
     const layer_jan = new ImageLayer({
       source: source_jan,
-      zIndex: 1,
-      opacity: 0.1,
+      ...imageLayerOption,
     });
     const layer_feb = new ImageLayer({
       source: source_feb,
-      zIndex: 1,
-      opacity: 0.1,
+      ...imageLayerOption,
     });
     const layer_mar = new ImageLayer({
       source: source_mar,
-      zIndex: 1,
-      opacity: 0.1,
+      ...imageLayerOption,
     });
     const layer_apr = new ImageLayer({
       source: source_apr,
-      zIndex: 1,
-      opacity: 0.1,
+      ...imageLayerOption,
     });
     const layer_may = new ImageLayer({
       source: source_may,
-      zIndex: 1,
-      opacity: 0.1,
+      ...imageLayerOption,
+    });
+    const layer_jun = new ImageLayer({
+      source: source_jun,
+      ...imageLayerOption,
+    });
+    const layer_jul = new ImageLayer({
+      source: source_jul,
+      ...imageLayerOption,
+    });
+    const layer_aug = new ImageLayer({
+      source: source_aug,
+      ...imageLayerOption,
+    });
+    const layer_sep = new ImageLayer({
+      source: source_sep,
+      ...imageLayerOption,
+    });
+    const layer_oct = new ImageLayer({
+      source: source_oct,
+      ...imageLayerOption,
+    });
+    const layer_nov = new ImageLayer({
+      source: source_nov,
+      ...imageLayerOption,
+    });
+    const layer_dec = new ImageLayer({
+      source: source_dec,
+      ...imageLayerOption,
     });
 
     map?.setLayers([
@@ -146,18 +232,23 @@ const ShadowMap = () => {
     map?.addLayer(layer_mar);
     map?.addLayer(layer_apr);
     map?.addLayer(layer_may);
+    map?.addLayer(layer_jun);
+    map?.addLayer(layer_jul);
+    map?.addLayer(layer_aug);
+    map?.addLayer(layer_sep);
+    map?.addLayer(layer_oct);
+    map?.addLayer(layer_nov);
+    map?.addLayer(layer_dec);
 
     map?.on('pointermove', (event) => {
       const pixel_jan = layer_jan.getData(event.pixel)?.toString();
       if (pixel_jan) {
         getShadowTime(pixel_jan, 'January');
       }
-
       const pixel_feb = layer_jan.getData(event.pixel)?.toString();
       if (pixel_feb) {
         getShadowTime(pixel_feb, 'February');
       }
-
       const pixel_mar = layer_mar.getData(event.pixel)?.toString();
       if (pixel_mar) {
         getShadowTime(pixel_mar, 'March');
@@ -167,10 +258,37 @@ const ShadowMap = () => {
       if (pixel_apr) {
         getShadowTime(pixel_apr, 'April');
       }
-
       const pixel_may = layer_may.getData(event.pixel)?.toString();
       if (pixel_may) {
         getShadowTime(pixel_may, 'May');
+      }
+      const pixel_jun = layer_jun.getData(event.pixel)?.toString();
+      if (pixel_jun) {
+        getShadowTime(pixel_jun, 'June');
+      }
+      const pixel_jul = layer_jul.getData(event.pixel)?.toString();
+      if (pixel_jul) {
+        getShadowTime(pixel_jul, 'July');
+      }
+      const pixel_aug = layer_aug.getData(event.pixel)?.toString();
+      if (pixel_aug) {
+        getShadowTime(pixel_aug, 'August');
+      }
+      const pixel_sep = layer_sep.getData(event.pixel)?.toString();
+      if (pixel_sep) {
+        getShadowTime(pixel_sep, 'September');
+      }
+      const pixel_oct = layer_oct.getData(event.pixel)?.toString();
+      if (pixel_oct) {
+        getShadowTime(pixel_oct, 'October');
+      }
+      const pixel_nov = layer_nov.getData(event.pixel)?.toString();
+      if (pixel_nov) {
+        getShadowTime(pixel_nov, 'November');
+      }
+      const pixel_dec = layer_dec.getData(event.pixel)?.toString();
+      if (pixel_dec) {
+        getShadowTime(pixel_dec, 'December');
       }
     });
     setMap(map);
@@ -182,6 +300,13 @@ const ShadowMap = () => {
         map?.removeLayer(layer_mar);
         map?.removeLayer(layer_apr);
         map?.removeLayer(layer_may);
+        map?.removeLayer(layer_jun);
+        map?.removeLayer(layer_jul);
+        map?.removeLayer(layer_aug);
+        map?.removeLayer(layer_sep);
+        map?.removeLayer(layer_oct);
+        map?.removeLayer(layer_nov);
+        map?.removeLayer(layer_dec);
       }
     };
   }, [getShadowTime, map]);
