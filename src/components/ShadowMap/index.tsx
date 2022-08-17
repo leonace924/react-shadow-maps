@@ -12,8 +12,6 @@ import { useGlobalStore } from 'store';
 import 'ol/ol.css';
 
 const ShadowMap = () => {
-  const updateShadow = useGlobalStore((state) => state.updateData);
-
   const initialMap = new Map({
     layers: [
       new TileLayer({
@@ -28,6 +26,7 @@ const ShadowMap = () => {
 
   const mapElement = useRef<HTMLDivElement | null>(null);
   const [map, setMap] = useState<Map | undefined>(initialMap);
+  const updateShadow = useGlobalStore((state) => state.updateData);
 
   const getShadowTime = useCallback(
     (pixel_value: any, month: string) => {
@@ -72,11 +71,34 @@ const ShadowMap = () => {
       ],
       operation: rasterFunction,
     });
-
     const source_feb = new RasterSource({
       sources: [
         new XYZ({
           ...xyzSourceOption('feb'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
+    const source_mar = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('mar'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
+    const source_apr = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('apr'),
+        }),
+      ],
+      operation: rasterFunction,
+    });
+    const source_may = new RasterSource({
+      sources: [
+        new XYZ({
+          ...xyzSourceOption('may'),
         }),
       ],
       operation: rasterFunction,
@@ -88,6 +110,18 @@ const ShadowMap = () => {
     });
     const layer_feb = new ImageLayer({
       source: source_feb,
+      zIndex: 1,
+    });
+    const layer_mar = new ImageLayer({
+      source: source_mar,
+      zIndex: 1,
+    });
+    const layer_apr = new ImageLayer({
+      source: source_apr,
+      zIndex: 1,
+    });
+    const layer_may = new ImageLayer({
+      source: source_may,
       zIndex: 1,
     });
 
@@ -102,6 +136,9 @@ const ShadowMap = () => {
     map?.setTarget(mapElement?.current);
     map?.addLayer(layer_jan);
     map?.addLayer(layer_feb);
+    map?.addLayer(layer_mar);
+    map?.addLayer(layer_apr);
+    map?.addLayer(layer_may);
 
     map?.on('pointermove', (event) => {
       const pixel_jan = layer_jan.getData(event.pixel)?.toString();
@@ -113,6 +150,21 @@ const ShadowMap = () => {
       if (pixel_feb) {
         getShadowTime(pixel_feb, 'February');
       }
+
+      const pixel_mar = layer_mar.getData(event.pixel)?.toString();
+      if (pixel_mar) {
+        getShadowTime(pixel_mar, 'March');
+      }
+
+      const pixel_apr = layer_apr.getData(event.pixel)?.toString();
+      if (pixel_apr) {
+        getShadowTime(pixel_apr, 'April');
+      }
+
+      const pixel_may = layer_may.getData(event.pixel)?.toString();
+      if (pixel_may) {
+        getShadowTime(pixel_may, 'May');
+      }
     });
     setMap(map);
 
@@ -120,6 +172,9 @@ const ShadowMap = () => {
       if (map) {
         map.removeLayer(layer_jan);
         map.removeLayer(layer_feb);
+        map?.removeLayer(layer_mar);
+        map?.removeLayer(layer_apr);
+        map?.removeLayer(layer_may);
       }
     };
   }, [getShadowTime, map]);
