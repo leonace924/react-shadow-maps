@@ -49,9 +49,9 @@ const ShadowMap = () => {
   const rasterFunction = (pixels: any): any => {
     const pixel = [0, 0, 0, 0];
     const val = pixels[0][3] / 255.0;
-    pixel[0] = 66 * val;
-    pixel[1] = 113 * val;
-    pixel[2] = 143 * val;
+    pixel[0] = 215 * val;
+    pixel[1] = 216 * val;
+    pixel[2] = 216 * val;
     pixel[3] = 255 * val;
     return pixel;
   };
