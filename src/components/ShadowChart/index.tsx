@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { useGlobalStore } from 'store';
-import { months } from './constant';
+import { monthsData } from 'constant/months';
 
 const ShadowChart = () => {
-  const [selectedMonth, setSelectedMonth] = useState(months[0]);
+  const [selectedMonth, setSelectedMonth] = useState(Object.keys(monthsData)[0]);
   const shadowStore = useGlobalStore((state) => state.shadowStore);
 
   const percentage = shadowStore.find((item) => item.month === selectedMonth)?.percentage ?? 0;
@@ -15,7 +15,7 @@ const ShadowChart = () => {
   return (
     <div>
       <select className="w-full mb-3" onChange={handleChange} value={selectedMonth}>
-        {months.map((month) => (
+        {Object.keys(monthsData).map((month) => (
           <option key={month} value={month}>
             {month}
           </option>
@@ -34,6 +34,7 @@ const ShadowChart = () => {
             textColor: '#5DB34C',
             pathColor: '#5DB34C',
             trailColor: '#E7FADA',
+            textSize: '16px',
           })}
         />
       </div>
