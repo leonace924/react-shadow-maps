@@ -8,7 +8,6 @@ const ShadowChart = () => {
   const shadowStore = useGlobalStore((state) => state.shadowStore);
 
   const percentage = shadowStore.find((item) => item.month === selectedMonth)?.percentage ?? 0;
-  // const percentage = 50;
 
   const handleChange = (event: any) => {
     setSelectedMonth(event.target.value);
@@ -44,4 +43,4 @@ const ShadowChart = () => {
   );
 };
 
-export default ShadowChart;
+export default React.memo(ShadowChart);
