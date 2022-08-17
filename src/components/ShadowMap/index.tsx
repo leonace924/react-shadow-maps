@@ -107,22 +107,27 @@ const ShadowMap = () => {
     const layer_jan = new ImageLayer({
       source: source_jan,
       zIndex: 1,
+      opacity: 0.1,
     });
     const layer_feb = new ImageLayer({
       source: source_feb,
       zIndex: 1,
+      opacity: 0.1,
     });
     const layer_mar = new ImageLayer({
       source: source_mar,
       zIndex: 1,
+      opacity: 0.1,
     });
     const layer_apr = new ImageLayer({
       source: source_apr,
       zIndex: 1,
+      opacity: 0.1,
     });
     const layer_may = new ImageLayer({
       source: source_may,
       zIndex: 1,
+      opacity: 0.1,
     });
 
     map?.setLayers([

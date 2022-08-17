@@ -8,6 +8,7 @@ const ShadowChart = () => {
   const shadowStore = useGlobalStore((state) => state.shadowStore);
 
   const percentage = shadowStore.find((item) => item.month === selectedMonth)?.percentage ?? 0;
+  const value = shadowStore.find((item) => item.month === selectedMonth)?.minutes ?? 0;
 
   const handleChange = (event: any) => {
     setSelectedMonth(event.target.value);
@@ -26,7 +27,7 @@ const ShadowChart = () => {
       <div style={{ width: 140, height: 140 }}>
         <CircularProgressbar
           value={percentage}
-          text={`${percentage}%`}
+          text={`${value.toFixed(1)}`}
           background
           backgroundPadding={0}
           styles={buildStyles({
