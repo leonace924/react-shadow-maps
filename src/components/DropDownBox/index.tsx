@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 type DropDownBoxProps = {
   iconName: string;
   title: string;
-  value: string;
+  value: React.ReactNode;
   children: React.ReactNode;
 };
 
@@ -13,9 +13,9 @@ const DropDownBox = ({ iconName, title, value, children }: DropDownBoxProps) => 
   const [isShowToolTip, setShowToolTip] = useState(false);
 
   return (
-    <div className="relative bg-white rounded-lg">
+    <div className="relative h-full bg-white rounded-lg">
       <div
-        className="flex items-center justify-between px-5 pt-6 pb-4 cursor-pointer"
+        className="flex items-center justify-between gap-6 px-5 py-6 cursor-pointer"
         onClick={() => setShowToolTip(!isShowToolTip)}
       >
         <div className="inline-flex items-center gap-3">
@@ -23,10 +23,11 @@ const DropDownBox = ({ iconName, title, value, children }: DropDownBoxProps) => 
           <h3 className="text-xl font-medium">{title}</h3>
         </div>
 
-        <h4 className="text-xl font-medium">{value}</h4>
+        <div className="text-right">{value}</div>
+        {/* <h4 className="text-xl font-medium">{value}</h4> */}
       </div>
 
-      <div className="flex justify-center pb-2">
+      <div className="absolute flex justify-center -translate-x-1/2 left-1/2 bottom-2">
         <Icon type="chevron-down" />
       </div>
 
