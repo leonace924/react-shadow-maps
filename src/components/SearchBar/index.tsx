@@ -9,11 +9,12 @@ const SearchBar = () => {
   console.log(currentCoordinate);
 
   const plantNames = totalData['Plant Information'].map((item, index) => {
-    return { id: index, name: item.Plant };
+    return { id: index, name: item.Variety };
   });
   return (
     <div className="relative z-20 grid items-center grid-cols-3 gap-6 mb-10">
       <ReactSearchAutocomplete
+        placeholder="SEARCH YOUR PLANT HERE"
         items={plantNames}
         // onSearch={handleOnSearch}
         // onHover={handleOnHover}
