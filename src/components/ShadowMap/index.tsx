@@ -5,7 +5,7 @@ import TileLayer from 'ol/layer/Tile';
 import ImageLayer from 'ol/layer/Image';
 import RasterSource from 'ol/source/Raster';
 import OSM from 'ol/source/OSM';
-import { transform } from 'ol/proj';
+import { transform, toLonLat } from 'ol/proj';
 import { createXYZ } from 'ol/tilegrid';
 import XYZ from 'ol/source/XYZ';
 import { useGlobalStore } from 'store';
@@ -30,6 +30,7 @@ const ShadowMap = () => {
   const mapElement = useRef<HTMLDivElement | null>(null);
   const [map, setMap] = useState<Map | undefined>(initialMap);
   const updateShadow = useGlobalStore((state) => state.updateData);
+  const setCoordinate = useGlobalStore((state) => state.setCoordinate);
 
   const getShadowTime = useCallback(
     (pixel_value: any, month: string) => {
@@ -246,6 +247,9 @@ const ShadowMap = () => {
     map?.addLayer(layer_dec);
 
     map?.on('pointermove', (event) => {
+      const coordinate = toLonLat(event.coordinate);
+      setCoordinate(coordinate);
+
       const pixel_jan = layer_jan.getData(event.pixel)?.toString();
       if (pixel_jan) {
         getShadowTime(pixel_jan, 'January');
@@ -314,10 +318,10 @@ const ShadowMap = () => {
         map?.removeLayer(layer_dec);
       }
     };
-  }, [getShadowTime, imageLayerOption, map]);
+  }, [getShadowTime, imageLayerOption, map, setCoordinate]);
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-full">
       <div ref={mapElement} className="w-full h-full map" />
     </div>
   );
