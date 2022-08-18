@@ -24,7 +24,6 @@ const DropDownBox = ({ iconName, title, value, children }: DropDownBoxProps) => 
         </div>
 
         <div className="text-right">{value}</div>
-        {/* <h4 className="text-xl font-medium">{value}</h4> */}
       </div>
 
       <div className="absolute flex justify-center -translate-x-1/2 left-1/2 bottom-2">
@@ -32,10 +31,13 @@ const DropDownBox = ({ iconName, title, value, children }: DropDownBoxProps) => 
       </div>
 
       <div
-        className={cx('absolute top-[110%] left-0 w-full z-[100] bg-white p-4', {
-          'opacity-0': !isShowToolTip,
-          'opacity-1': isShowToolTip,
-        })}
+        className={cx(
+          'absolute top-[110%] left-0 w-full z-[100] bg-white p-4 transition-all duration-300',
+          {
+            'opacity-0': !isShowToolTip,
+            'opacity-1': isShowToolTip,
+          },
+        )}
       >
         {children}
       </div>
