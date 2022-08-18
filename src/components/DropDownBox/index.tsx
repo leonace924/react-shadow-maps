@@ -1,6 +1,7 @@
-import Icon from 'components/Icons';
 import cx from 'classnames';
 import React, { useState } from 'react';
+import Icon from 'components/Icons';
+import { useDetectClickOutside } from 'react-detect-click-outside';
 
 type DropDownBoxProps = {
   iconName: string;
@@ -12,8 +13,10 @@ type DropDownBoxProps = {
 const DropDownBox = ({ iconName, title, value, children }: DropDownBoxProps) => {
   const [isShowToolTip, setShowToolTip] = useState(false);
 
+  const ref = useDetectClickOutside({ onTriggered: () => setShowToolTip(false) });
+
   return (
-    <div className="relative h-full bg-white rounded-lg">
+    <div className="relative h-full bg-white rounded-lg" ref={ref}>
       <div
         className="flex items-center justify-between gap-6 px-5 py-6 cursor-pointer"
         onClick={() => setShowToolTip(!isShowToolTip)}
