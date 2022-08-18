@@ -24,7 +24,7 @@ const ShadowChart = () => {
       </select>
 
       <h3 className="mb-2 text-lg font-medium">Shadow Time</h3>
-      <div style={{ width: 140, height: 140 }}>
+      <div style={{ width: 100, height: 100 }}>
         <CircularProgressbar
           value={percentage}
           text={`${value.toFixed(1)}`}

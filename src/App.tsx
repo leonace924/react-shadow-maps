@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className="container p-8 mx-auto">
       <SearchBar />
-      <div className="relative w-[600px] h-[600px]">
+      <div className="relative w-[800px] h-[600px]">
         <div className="absolute z-30 px-8 py-5 bg-white rounded-lg right-5 top-5">
           <ShadowChart />
         </div>
