@@ -8,6 +8,8 @@ type Shadow = {
 };
 
 type GlobalState = {
+  selectedVariety: string;
+  setVariety: (variety: string) => void;
   shadowStore: Array<Shadow>;
   updateData: (data: Shadow) => void;
   currentCoordinate: Array<number>;
@@ -18,6 +20,7 @@ export const useGlobalStore = create<GlobalState>()(
   devtools(
     persist((set) => ({
       shadowStore: [],
+      selectedVariety: '',
       currentCoordinate: [],
       updateData: (newData) => {
         set((state) => ({
@@ -28,6 +31,9 @@ export const useGlobalStore = create<GlobalState>()(
       },
       setCoordinate: (coordinate) => {
         set(() => ({ currentCoordinate: coordinate }));
+      },
+      setVariety: (variety) => {
+        set(() => ({ selectedVariety: variety }));
       },
     })),
   ),

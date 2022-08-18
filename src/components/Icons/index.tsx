@@ -33,8 +33,8 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
           fill="none"
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M32 21C32 27.0751 27.0751 32 21 32C14.9249 32 10 27.0751 10 21C10 14.9249 14.9249 10 21 10C27.0751 10 32 14.9249 32 21Z"
             stroke="#231815"
             strokeWidth="2"
