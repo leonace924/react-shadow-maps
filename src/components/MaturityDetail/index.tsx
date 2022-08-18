@@ -1,14 +1,24 @@
 import React from 'react';
+import dayjs from 'dayjs';
 import { totalData } from 'constant/totalData';
 import { useGlobalStore } from 'store';
 import Icon from 'components/Icons';
 
 const MaturityDetail = () => {
+  const today = dayjs().format('MM-DD');
+  console.log(today);
   const selectedVariety = useGlobalStore((state) => state.selectedVariety);
 
   const maturityDays = totalData['Plant Information'].find(
     (item) => item.Variety === selectedVariety,
   )?.['Maturity Days (GDD)'].Date.length;
+
+  const earliest = totalData['Plant Information']
+    .find((item) => item.Variety === selectedVariety)
+    ?.['Maturity Days (GDD)'].Date.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0))
+    .filter((item) => dayjs(item).format('MM-DD') >= today)?.[0];
+
+  console.log(earliest);
 
   const plantName = totalData['Plant Information'].find(
     (item) => item.Variety === selectedVariety,
@@ -27,7 +37,7 @@ const MaturityDetail = () => {
         <div className="p-8 bg-white rounded-lg pt-14 pt-15">
           <div className="rounded-full border border-[#178271] w-[105px] h-[105px] flex items-center justify-center flex-col absolute -top-[60px] bg-white mx-auto left-1/2 -translate-x-1/2">
             <Icon type="address" />
-            <h4 className="text-3xl font-semibold">{maturityDays}</h4>
+            <h4 className="text-2xl font-semibold">{maturityDays}</h4>
           </div>
 
           <div className="text-center">
@@ -44,7 +54,9 @@ const MaturityDetail = () => {
 
             <div className="text-sm">
               <span className="text-gray-500">Earliest Maturity Date:</span>
-              <span></span>
+              <span className="block">
+                <strong>{dayjs(earliest).format('MMMM D')}</strong>
+              </span>
             </div>
           </div>
         </div>
