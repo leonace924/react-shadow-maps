@@ -23,7 +23,7 @@ const ShadowChart = () => {
         ))}
       </select>
 
-      <h3 className="mb-2 text-lg font-medium">Shadow Time</h3>
+      <h3 className="mb-2 text-base font-medium text-center">Shadow Time</h3>
       <div style={{ width: 100, height: 100 }}>
         <CircularProgressbar
           value={percentage}
@@ -40,7 +40,7 @@ const ShadowChart = () => {
         />
       </div>
 
-      <p className="mt-2">In Shadow (mins)</p>
+      <p className="mt-2 text-sm">In Shadow (mins)</p>
     </div>
   );
 };
