@@ -17,7 +17,9 @@ const SearchBar = () => {
         items={plantNames}
         // onSearch={handleOnSearch}
         // onHover={handleOnHover}
-        onSelect={(item) => console.log(item)}
+        onSelect={(item) => {
+          setVariety(item.name);
+        }}
         // onFocus={handleOnFocus}
         autoFocus
         // formatResult={formatResult}

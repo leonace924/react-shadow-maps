@@ -37,8 +37,8 @@ const DropDownBox = ({ iconName, title, value, children }: DropDownBoxProps) => 
         className={cx(
           'absolute top-[110%] left-0 w-full z-[100] bg-white p-4 transition-all duration-300',
           {
-            'opacity-0': !isShowToolTip,
-            'opacity-1': isShowToolTip,
+            'opacity-0 invisible': !isShowToolTip,
+            'opacity-1 visible': isShowToolTip,
           },
         )}
       >
