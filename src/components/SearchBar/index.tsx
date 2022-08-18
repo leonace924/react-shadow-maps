@@ -23,9 +23,9 @@ const SearchBar = () => {
         // formatResult={formatResult}
       />
       <div className="ml-8">
-        <p className="text-lg font-medium">{`${currentCoordinate[0].toFixed(
+        <p className="text-lg font-medium">{`${currentCoordinate?.[0]?.toFixed(
           6,
-        )} ${currentCoordinate[1].toFixed(6)}`}</p>
+        )} ${currentCoordinate?.[1]?.toFixed(6)}`}</p>
       </div>
       <div className="relative">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
