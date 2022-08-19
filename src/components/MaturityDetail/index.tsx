@@ -5,17 +5,22 @@ import { totalData } from 'constant/totalData';
 import { useGlobalStore } from 'store';
 
 const MaturityDetail = () => {
-  const today = dayjs().format('MM-DD');
+  const selectedDate = useGlobalStore((state) => state.selectedDate);
   const selectedVariety = useGlobalStore((state) => state.selectedVariety);
+
+  const keyIndex =
+    totalData['Plant Information']
+      .find((item) => item.Variety === selectedVariety)
+      ?.['Maturity Days (GDD)'].Date.findIndex((item) => item === selectedDate) ?? 0;
 
   const maturityDays = totalData['Plant Information'].find(
     (item) => item.Variety === selectedVariety,
-  )?.['Maturity Days (GDD)']['Maturity Days']?.[0];
+  )?.['Maturity Days (GDD)']['Maturity Days']?.[keyIndex];
 
   const earliest = totalData['Plant Information']
     .find((item) => item.Variety === selectedVariety)
     ?.['Maturity Days (GDD)'].Date.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0))
-    .filter((item) => dayjs(item).format('MM-DD') >= today)?.[0];
+    .filter((item) => item >= selectedDate)?.[0];
 
   const plantName = totalData['Plant Information'].find(
     (item) => item.Variety === selectedVariety,
