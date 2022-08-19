@@ -79,7 +79,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <g clip-path="url(#clip0_44_215)">
+          <g clipPath="url(#clip0_44_215)">
             <line
               x1="37.4545"
               y1="30.5"
@@ -91,7 +91,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
               strokeLinejoin="round"
             />
           </g>
-          <g clip-path="url(#clip1_44_215)">
+          <g clipPath="url(#clip1_44_215)">
             <line
               x1="8.00963"
               y1="13.5"
@@ -103,7 +103,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
               strokeLinejoin="round"
             />
           </g>
-          <g clip-path="url(#clip2_44_215)">
+          <g clipPath="url(#clip2_44_215)">
             <line
               x1="30.5"
               y1="37.4545"
@@ -115,7 +115,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
               strokeLinejoin="round"
             />
           </g>
-          <g clip-path="url(#clip3_44_215)">
+          <g clipPath="url(#clip3_44_215)">
             <line
               x1="13.5"
               y1="8.00962"
@@ -127,7 +127,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
               strokeLinejoin="round"
             />
           </g>
-          <g clip-path="url(#clip4_44_215)">
+          <g clipPath="url(#clip4_44_215)">
             <line
               x1="21"
               y1="40"
@@ -139,7 +139,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
               strokeLinejoin="round"
             />
           </g>
-          <g clip-path="url(#clip5_44_215)">
+          <g clipPath="url(#clip5_44_215)">
             <line
               x1="21"
               y1="6"
@@ -151,7 +151,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
               strokeLinejoin="round"
             />
           </g>
-          <g clip-path="url(#clip6_44_215)">
+          <g clipPath="url(#clip6_44_215)">
             <line
               x1="11.5"
               y1="37.4545"
@@ -163,7 +163,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
               strokeLinejoin="round"
             />
           </g>
-          <g clip-path="url(#clip7_44_215)">
+          <g clipPath="url(#clip7_44_215)">
             <line
               x1="28.5"
               y1="8.00962"
@@ -175,7 +175,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
               strokeLinejoin="round"
             />
           </g>
-          <g clip-path="url(#clip8_44_215)">
+          <g clipPath="url(#clip8_44_215)">
             <line
               x1="4.54551"
               y1="30.5"
@@ -187,7 +187,7 @@ const Icon = ({ type, onClick, ...props }: IIconProps) => {
               strokeLinejoin="round"
             />
           </g>
-          <g clip-path="url(#clip9_44_215)">
+          <g clipPath="url(#clip9_44_215)">
             <line
               x1="33.9904"
               y1="13.5"

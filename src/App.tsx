@@ -5,6 +5,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import SearchBar from 'components/SearchBar';
 import WeatherDetail from 'components/WeatherDetail';
 import MaturityDetail from 'components/MaturityDetail';
+import LineChart from 'components/LineChart';
 
 const App = () => {
   return (
@@ -22,6 +23,9 @@ const App = () => {
 
           <div className="bg-[#949186F7] p-8 rounded-md">
             <MaturityDetail />
+            <div className="mt-3">
+              <LineChart />
+            </div>
           </div>
         </div>
       </div>
