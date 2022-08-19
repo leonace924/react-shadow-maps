@@ -18,12 +18,14 @@ const MaturityDetail = () => {
 
   const maturityDays = plantInformation?.['Maturity Days (GDD)']['Maturity Days']?.[keyIndex];
 
-  // const minDays = plantInformation?.['Maturity Days (GDD)']?.['Maturity Days']
-  //   ? Math.min(plantInformation?.['Maturity Days (GDD)']?.['Maturity Days'])
-  //   : 0;
+  const minDays =
+    plantInformation?.['Maturity Days (GDD)']['Maturity Days'] &&
+    Math.min(...plantInformation?.['Maturity Days (GDD)']?.['Maturity Days']);
 
-  console.log(plantInformation?.['Maturity Days (GDD)']?.['Maturity Days']);
-  const earliest = plantInformation?.['Maturity Days (GDD)']['Maturity Days']?.[0];
+  const earliestIndex = plantInformation?.['Maturity Days (GDD)']['Maturity Days'].findIndex(
+    (item) => item === minDays,
+  );
+  const earliestDate = plantInformation?.['Maturity Days (GDD)'].Date[earliestIndex ?? 0];
 
   const plantName = totalData['Plant Information']?.find(
     (item: any) => item.Variety === selectedVariety,
@@ -65,7 +67,7 @@ const MaturityDetail = () => {
                 <div className="text-sm">
                   <span className="text-gray-500">Earliest Planting Date:</span>
                   <span className="block">
-                    <strong>{dayjs(earliest).format('MMMM D')}</strong>
+                    <strong>{dayjs(earliestDate).format('MMMM D')}</strong>
                   </span>
                 </div>
               </>
