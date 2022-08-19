@@ -26,7 +26,9 @@ const LineChart = () => {
   const chartData = totalData['Plant Information'].find(
     (item) => item.Variety === selectedVariety,
   )?.['Maturity Days (GDD)']?.Phases?.[0];
-
+  const plantName = totalData['Plant Information'].find(
+    (item) => item.Variety === selectedVariety,
+  )?.Plant;
   if (!render) return <></>;
 
   return (
@@ -39,7 +41,7 @@ const LineChart = () => {
           ),
           datasets: [
             {
-              label: 'Basil',
+              label: plantName,
               borderColor: '#008366',
               data: chartData,
               tension: 0.1,
