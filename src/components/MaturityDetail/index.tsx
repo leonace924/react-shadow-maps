@@ -8,26 +8,29 @@ const MaturityDetail = () => {
   const selectedDate = useGlobalStore((state) => state.selectedDate);
   const selectedVariety = useGlobalStore((state) => state.selectedVariety);
 
+  const plantInformation = totalData['Plant Information']?.find(
+    (item) => item.Variety === selectedVariety,
+  );
   const keyIndex =
-    totalData['Plant Information']
-      .find((item) => item.Variety === selectedVariety)
-      ?.['Maturity Days (GDD)'].Date.findIndex((item) => item === selectedDate) ?? 0;
+    plantInformation?.['Maturity Days (GDD)'].Date.findIndex(
+      (item: any) => item === selectedDate,
+    ) ?? 0;
 
-  const maturityDays = totalData['Plant Information'].find(
-    (item) => item.Variety === selectedVariety,
-  )?.['Maturity Days (GDD)']['Maturity Days']?.[keyIndex];
+  const maturityDays = plantInformation?.['Maturity Days (GDD)']['Maturity Days']?.[keyIndex];
 
-  const earliest = totalData['Plant Information']
-    .find((item) => item.Variety === selectedVariety)
-    ?.['Maturity Days (GDD)'].Date.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0))
-    .filter((item) => item >= selectedDate)?.[0];
+  // const minDays = plantInformation?.['Maturity Days (GDD)']?.['Maturity Days']
+  //   ? Math.min(plantInformation?.['Maturity Days (GDD)']?.['Maturity Days'])
+  //   : 0;
 
-  const plantName = totalData['Plant Information'].find(
-    (item) => item.Variety === selectedVariety,
+  console.log(plantInformation?.['Maturity Days (GDD)']?.['Maturity Days']);
+  const earliest = plantInformation?.['Maturity Days (GDD)']['Maturity Days']?.[0];
+
+  const plantName = totalData['Plant Information']?.find(
+    (item: any) => item.Variety === selectedVariety,
   )?.Plant;
 
-  const harvestLength = totalData['Plant Information'].find(
-    (item) => item.Variety === selectedVariety,
+  const harvestLength = totalData['Plant Information']?.find(
+    (item: any) => item.Variety === selectedVariety,
   )?.['Harvest Window'];
 
   return (
@@ -60,7 +63,7 @@ const MaturityDetail = () => {
                   </span>
                 </div>
                 <div className="text-sm">
-                  <span className="text-gray-500">Earliest Maturity Date:</span>
+                  <span className="text-gray-500">Earliest Planting Date:</span>
                   <span className="block">
                     <strong>{dayjs(earliest).format('MMMM D')}</strong>
                   </span>
