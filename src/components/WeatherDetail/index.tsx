@@ -1,46 +1,47 @@
 import React from 'react';
 import DropDownBox from 'components/DropDownBox';
+import { useGlobalStore } from 'store';
 import { totalData } from 'constant/totalData';
 
 const WeatherDetail = () => {
-  const gustSpeed = totalData['Weather'][0]['Wind Gust Speed (m/s)'];
-  const avgSpeed = totalData['Weather'][0]['Average Wind Speed (m/s)'];
-  const windDirection = totalData['Weather'][0]['Average Wind Direction (degrees)'];
-  const directionGust =
-    totalData['Weather'][0]['Direction of Maximum 2 Minute Wind Gust (degrees)'];
+  const currentCoordinate = useGlobalStore((state) => state.currentCoordinate);
+  const selectedDate = useGlobalStore((state) => state.selectedDate);
 
-  const avgTemp = totalData['Weather'][0]['Average Temperature (Fahrenheit)'];
-  const maxTemp = totalData['Weather'][0]['Maximum temperature (Fahrenheit)'];
-  const minTemp = totalData['Weather'][0]['Minimum Temperature (Fahrenheit)'];
+  const currentWeather = totalData['Weather'].find((item) => item.Date === selectedDate);
+  const gustSpeed = currentWeather?.['Wind Gust Speed (m/s)'];
+  const avgSpeed = currentWeather?.['Average Wind Speed (m/s)'];
+  const windDirection = currentWeather?.['Average Wind Direction (degrees)'];
+  const directionGust = currentWeather?.['Direction of Maximum 2 Minute Wind Gust (degrees)'];
 
-  const sunrise = totalData['Weather'][0]['Sunrise Time'];
-  const sunset = totalData['Weather'][0]['Sunset Time'];
-  const minsShadow = totalData['Weather'][0]['Shadow time(s)'];
-  const avgSolarRadiation = totalData['Weather'][0]['Average Solar Radiation (W/M^2)'];
+  const avgTemp = currentWeather?.['Average Temperature (Fahrenheit)'];
+  const maxTemp = currentWeather?.['Maximum temperature (Fahrenheit)'];
+  const minTemp = currentWeather?.['Minimum Temperature (Fahrenheit)'];
+
+  const sunrise = currentWeather?.['Sunrise Time'];
+  const sunset = currentWeather?.['Sunset Time'];
+  const minsShadow = currentWeather?.['Shadow time(s)'];
+  const avgSolarRadiation = currentWeather?.['Average Solar Radiation (W/M^2)'];
 
   const totalHorizontalSolar =
-    totalData['Weather'][0]['Day Total Global Horizontal Solar Irradiance (W/m^2) [Clear Sky]'];
+    currentWeather?.['Day Total Global Horizontal Solar Irradiance (W/m^2) [Clear Sky]'];
   const maxNormalSolar =
-    totalData['Weather'][0][
-      'Maximum Value of Direct Normal Solar Irradiance in Day (W/m^2) [Clear Sky]'
-    ];
+    currentWeather?.['Maximum Value of Direct Normal Solar Irradiance in Day (W/m^2) [Clear Sky]'];
   const maxHorizontalSolar =
-    totalData['Weather'][0][
+    currentWeather?.[
       'Maximum Value of Global Horizontal Solar Irradiance in Day (W/m^2) [Clear Sky]'
     ];
   const avgDirectSolar =
-    totalData['Weather'][0]['Average Direct Normal Solar Irradiance (W/m^2) [Clear Sky]'];
+    currentWeather?.['Average Direct Normal Solar Irradiance (W/m^2) [Clear Sky]'];
   const maxDiffuseSolar =
-    totalData['Weather'][0][
+    currentWeather?.[
       'Maximum Value of Diffuse Horizontal Solar Irradiance in Day (W/m^2) [Clear Sky]'
     ];
-  const avgGlobalSolar =
-    totalData['Weather'][0]['Average Global Horizontal Solar Irradiance (W/m^2)'];
+  const avgGlobalSolar = currentWeather?.['Average Global Horizontal Solar Irradiance (W/m^2)'];
   const totalNormalSolar =
-    totalData['Weather'][0]['Day Total Direct Normal Solar Irradiance (W/m^2) [Clear Sky]'];
-  const totalSolar = totalData['Weather'][0]['Total Solar Radiation (W/M^2)'];
-  const maxUV = totalData['Weather'][0]['Maximum UV Index (0-11+)'];
-  // const sunrise = totalData['Weather'][0][];
+    currentWeather?.['Day Total Direct Normal Solar Irradiance (W/m^2) [Clear Sky]'];
+  const totalSolar = currentWeather?.['Total Solar Radiation (W/M^2)'];
+  const maxUV = currentWeather?.['Maximum UV Index (0-11+)'];
+  // const sunrise = currentWeather?.[];
 
   return (
     <div className="grid items-center grid-cols-3 gap-8 mb-14">
