@@ -10,7 +10,7 @@ const MaturityDetail = () => {
 
   const maturityDays = totalData['Plant Information'].find(
     (item) => item.Variety === selectedVariety,
-  )?.['Maturity Days (GDD)'].Date.length;
+  )?.['Maturity Days (GDD)']['Maturity Days']?.[0];
 
   const earliest = totalData['Plant Information']
     .find((item) => item.Variety === selectedVariety)
