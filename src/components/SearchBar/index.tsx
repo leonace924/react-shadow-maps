@@ -17,8 +17,6 @@ const SearchBar = () => {
   });
 
   const handleChangeDate = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(new Date(event.target.value));
-
     const newDate = dayjs(event.target.value).format('YYYY-MM-DD');
     setDate(newDate);
   };

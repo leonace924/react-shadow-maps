@@ -29,10 +29,11 @@ const LineChart = () => {
   const plantName = totalData['Plant Information'].find(
     (item) => item.Variety === selectedVariety,
   )?.Plant;
+
   if (!render) return <></>;
 
   return (
-    <div className="bg-white">
+    <div className="p-4 bg-white">
       <Line
         data={{
           labels: ['Seed Phase', 'Vegetation', 'Blom', 'First Harvest', 'Last Harvest'].slice(
@@ -62,14 +63,8 @@ const LineChart = () => {
           responsive: true,
           plugins: {
             legend: {
-              display: true,
+              display: false,
               position: 'top' as const,
-
-              // labels: {
-              //   pointStyle: 'circle',
-              //   usePointStyle: true,
-              //   boxWidth: 6,
-              // },
             },
           },
         }}
