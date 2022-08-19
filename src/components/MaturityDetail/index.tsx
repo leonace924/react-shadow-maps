@@ -44,22 +44,29 @@ const MaturityDetail = () => {
 
           <div className="text-center">
             <p className="mb-3">
-              <strong>Days of Maturity</strong>
+              <strong>
+                {maturityDays
+                  ? 'Days of Maturity'
+                  : "This plant won't get matured before frost hits"}
+              </strong>
             </p>
 
-            <div className="mb-1 text-sm">
-              <span className="text-gray-500">Harvest Length:</span>
-              <span className="block">
-                <strong>{harvestLength} Days</strong>
-              </span>
-            </div>
-
-            <div className="text-sm">
-              <span className="text-gray-500">Earliest Maturity Date:</span>
-              <span className="block">
-                <strong>{dayjs(earliest).format('MMMM D')}</strong>
-              </span>
-            </div>
+            {maturityDays && (
+              <>
+                <div className="mb-1 text-sm">
+                  <span className="text-gray-500">Harvest Length:</span>
+                  <span className="block">
+                    <strong>{harvestLength} Days</strong>
+                  </span>
+                </div>
+                <div className="text-sm">
+                  <span className="text-gray-500">Earliest Maturity Date:</span>
+                  <span className="block">
+                    <strong>{dayjs(earliest).format('MMMM D')}</strong>
+                  </span>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
