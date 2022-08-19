@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-import { totalData } from 'constant/totalData';
 import { useGlobalStore } from 'store';
+import { totalData } from 'constant/totalData';
 
 const SearchBar = () => {
+  const today = dayjs().format('YYYY-MM-DD');
+
+  const [date, setDate] = useState(today);
   const currentCoordinate = useGlobalStore((state) => state.currentCoordinate);
   const setVariety = useGlobalStore((state) => state.setVariety);
+  const setSelectedDate = useGlobalStore((state) => state.setSelectedDate);
 
   const plantNames = totalData['Plant Information'].map((item, index) => {
     return { id: index, name: item.Variety };
   });
+
+  const handleChangeDate = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = dayjs(new Date(event.target.value)).format('YYYY-MM-DD');
+    setDate(newDate);
+  };
+
+  useEffect(() => {
+    setSelectedDate(date);
+  }, [date, setSelectedDate]);
+
   return (
     <div className="relative z-20 grid items-center grid-cols-3 gap-6 mb-10">
       <ReactSearchAutocomplete
@@ -17,19 +32,21 @@ const SearchBar = () => {
         items={plantNames}
         // onSearch={handleOnSearch}
         // onHover={handleOnHover}
+        // onFocus={handleOnFocus}
+        // formatResult={formatResult}
         onSelect={(item) => {
           setVariety(item.name);
         }}
-        // onFocus={handleOnFocus}
         autoFocus
-        // formatResult={formatResult}
       />
+
       <div className="ml-8 text-center">
         <p className="text-lg ">Latitude and Longitude</p>
-        <p className="text-lg font-medium">{`${currentCoordinate?.[0]?.toFixed(
-          6,
-        )}, ${currentCoordinate?.[1]?.toFixed(6)}`}</p>
+        <p className="text-lg font-medium">
+          {`${currentCoordinate?.[0]?.toFixed(4)}, ${currentCoordinate?.[1]?.toFixed(4)}`}
+        </p>
       </div>
+
       <div className="relative">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
@@ -50,6 +67,8 @@ const SearchBar = () => {
           type="date"
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Select date"
+          value={date}
+          onChange={(e) => handleChangeDate(e)}
         />
       </div>
     </div>
