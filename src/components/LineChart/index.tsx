@@ -21,11 +21,17 @@ const LineChart = () => {
     setRender(true);
   }, []);
 
+  const selectedDate = useGlobalStore((state) => state.selectedDate);
   const selectedVariety = useGlobalStore((state) => state.selectedVariety);
+
+  const keyIndex =
+    totalData['Plant Information']
+      .find((item) => item.Variety === selectedVariety)
+      ?.['Maturity Days (GDD)'].Date.findIndex((item) => item === selectedDate) ?? 0;
 
   const chartData = totalData['Plant Information'].find(
     (item) => item.Variety === selectedVariety,
-  )?.['Maturity Days (GDD)']?.Phases?.[0];
+  )?.['Maturity Days (GDD)']?.Phases?.[keyIndex];
   const plantName = totalData['Plant Information'].find(
     (item) => item.Variety === selectedVariety,
   )?.Plant;
