@@ -37,9 +37,16 @@ const MaturityDetail = () => {
 
   return (
     <div>
-      <h3 className="mb-20 text-2xl font-normal text-white">
-        <strong>{plantName}</strong> ({selectedVariety})
-      </h3>
+      <div className="flex flex-wrap items-end justify-between mb-20">
+        <h3 className="text-2xl font-normal text-white">
+          <strong>{plantName}</strong> ({selectedVariety})
+        </h3>
+
+        <div className="text-xs font-medium text-white lg:text-sm">
+          <p>Last Forst ({dayjs(totalData['Last Frost Date']).format('YYYY')})</p>
+          <p>First Forst ({Number(dayjs(totalData['First Frost Date']).format('YYYY')) + 1})</p>
+        </div>
+      </div>
       <div className="max-w-[300px] mx-auto relative">
         <div className="p-6 bg-white rounded-lg pt-14 pt-15">
           <div className="rounded-full border border-[#178271] w-[105px] h-[105px] flex items-center justify-center flex-col absolute -top-[60px] bg-white mx-auto left-1/2 -translate-x-1/2">

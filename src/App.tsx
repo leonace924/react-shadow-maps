@@ -13,7 +13,7 @@ const App = () => {
       <div className="container p-8 mx-auto">
         <SearchBar />
         <WeatherDetail />
-        <div className="grid grid-cols-[3fr__2fr] gap-6 relative z-10">
+        <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[3fr__2fr] gap-6 relative z-10">
           <div className="relative w-full h-[500px] rounded-md overflow-hidden">
             <div className="absolute z-30 px-5 py-3 bg-white rounded-lg right-5 top-5">
               <ShadowChart />
