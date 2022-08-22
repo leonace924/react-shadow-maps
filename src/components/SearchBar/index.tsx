@@ -12,6 +12,10 @@ const SearchBar = () => {
   const setVariety = useGlobalStore((state) => state.setVariety);
   const setSelectedDate = useGlobalStore((state) => state.setSelectedDate);
 
+  useEffect(() => {
+    setVariety('Buttercrunch Lettuce');
+  }, []);
+
   const plantNames = totalData['Plant Information'].map((item, index) => {
     return { id: index, name: item.Variety };
   });
