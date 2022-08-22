@@ -23,7 +23,7 @@ export const useGlobalStore = create<GlobalState>()(
     persist((set) => ({
       selectedDate: '',
       shadowStore: [],
-      selectedVariety: '',
+      selectedVariety: 'Buttercrunch Lettuce',
       currentCoordinate: [],
       updateData: (newData) => {
         set((state) => ({
