@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
+import dayjs from 'dayjs';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -31,6 +32,8 @@ const ShadowMap = () => {
   const [map, setMap] = useState<Map | undefined>(initialMap);
   const updateShadow = useGlobalStore((state) => state.updateData);
   const setCoordinate = useGlobalStore((state) => state.setCoordinate);
+  const selectedDate = useGlobalStore((state) => state.selectedDate);
+  const selectedMon = dayjs(selectedDate).format('M');
 
   const getShadowTime = useCallback(
     (pixel_value: any, month: string) => {
@@ -69,7 +72,7 @@ const ShadowMap = () => {
   const imageLayerOption = useMemo(() => {
     return {
       zIndex: 1,
-      opacity: 0.1,
+      opacity: 1,
     };
   }, []);
 
@@ -233,18 +236,48 @@ const ShadowMap = () => {
       }),
     ]);
     map?.setTarget(mapElement?.current);
-    map?.addLayer(layer_jan);
-    map?.addLayer(layer_feb);
-    map?.addLayer(layer_mar);
-    map?.addLayer(layer_apr);
-    map?.addLayer(layer_may);
-    map?.addLayer(layer_jun);
-    map?.addLayer(layer_jul);
-    map?.addLayer(layer_aug);
-    map?.addLayer(layer_sep);
-    map?.addLayer(layer_oct);
-    map?.addLayer(layer_nov);
-    map?.addLayer(layer_dec);
+
+    switch (selectedMon) {
+      case '1':
+        map?.addLayer(layer_jan);
+        break;
+      case '2':
+        map?.addLayer(layer_feb);
+        break;
+      case '3':
+        map?.addLayer(layer_mar);
+        break;
+      case '4':
+        map?.addLayer(layer_apr);
+        break;
+      case '5':
+        map?.addLayer(layer_may);
+        break;
+      case '6':
+        map?.addLayer(layer_jun);
+        break;
+      case '7':
+        map?.addLayer(layer_jul);
+        break;
+      case '8':
+        map?.addLayer(layer_aug);
+        break;
+      case '9':
+        map?.addLayer(layer_sep);
+        break;
+      case '10':
+        map?.addLayer(layer_oct);
+        break;
+      case '11':
+        map?.addLayer(layer_nov);
+        break;
+      case '12':
+        map?.addLayer(layer_dec);
+        break;
+      default:
+        map?.addLayer(layer_jan);
+        break;
+    }
 
     map?.on('pointermove', (event) => {
       const coordinate = toLonLat(event.coordinate);
@@ -318,7 +351,7 @@ const ShadowMap = () => {
         map?.removeLayer(layer_dec);
       }
     };
-  }, [getShadowTime, imageLayerOption, map, setCoordinate]);
+  }, [getShadowTime, imageLayerOption, map, selectedMon, setCoordinate]);
 
   return (
     <div className="w-full h-full">

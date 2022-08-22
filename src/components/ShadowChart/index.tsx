@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
+import dayjs from 'dayjs';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { useGlobalStore } from 'store';
-import { monthsData } from 'constant/months';
 
 const ShadowChart = () => {
-  const [selectedMonth, setSelectedMonth] = useState(Object.keys(monthsData)[0]);
   const shadowStore = useGlobalStore((state) => state.shadowStore);
+  const selectedDate = useGlobalStore((state) => state.selectedDate);
+  const selectedMonth = dayjs(selectedDate).format('MMMM');
 
   const percentage = shadowStore.find((item) => item.month === selectedMonth)?.percentage ?? 0;
   const value = shadowStore.find((item) => item.month === selectedMonth)?.minutes ?? 0;
 
-  const handleChange = (event: any) => {
-    setSelectedMonth(event.target.value);
-  };
   return (
     <div>
-      <select className="w-full mb-3" onChange={handleChange} value={selectedMonth}>
+      {/* <select className="w-full mb-3" onChange={handleChange} value={selectedMonth}>
         {Object.keys(monthsData).map((month) => (
           <option key={month} value={month}>
             {month}
           </option>
         ))}
-      </select>
+      </select> */}
 
       <h3 className="mb-2 text-base font-medium text-center">Shadow Time</h3>
       <div style={{ width: 100, height: 100 }}>

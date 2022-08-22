@@ -52,7 +52,7 @@ const MaturityDetail = () => {
               <strong>
                 {maturityDays
                   ? 'Days of Maturity'
-                  : "This plant won't get matured before frost hits"}
+                  : "This plant won't get matured before frost hits to: If planted today, this plant will not reach full maturity before your next frost."}
               </strong>
             </p>
 
@@ -65,7 +65,7 @@ const MaturityDetail = () => {
                   </span>
                 </div>
                 <div className="text-sm">
-                  <span className="text-gray-500">Earliest Planting Date:</span>
+                  <span className="text-gray-500">First Harvest Date:</span>
                   <span className="block">
                     <strong>{dayjs(earliestDate).format('MMMM D')}</strong>
                   </span>
