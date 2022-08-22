@@ -43,7 +43,7 @@ const SearchBar = () => {
       <div className="ml-8 text-center">
         <p className="text-lg ">Latitude and Longitude</p>
         <p className="text-lg font-medium">
-          {`${currentCoordinate?.[0]?.toFixed(4)}, ${currentCoordinate?.[1]?.toFixed(4)}`}
+          {`${currentCoordinate?.[1]?.toFixed(4)}, ${currentCoordinate?.[0]?.toFixed(4)}`}
         </p>
       </div>
 

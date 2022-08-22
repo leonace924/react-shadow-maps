@@ -42,7 +42,7 @@ const LineChart = () => {
     <div className="p-4 bg-white">
       <Line
         data={{
-          labels: ['Seed Phase', 'Vegetation', 'Blom', 'First Harvest', 'Last Harvest'].slice(
+          labels: ['Seed Phase', 'Transplant', 'Vegetation', 'Bloom', 'First Harvest'].slice(
             0,
             chartData?.length,
           ),
@@ -71,6 +71,11 @@ const LineChart = () => {
             legend: {
               display: false,
               position: 'top' as const,
+            },
+          },
+          scales: {
+            y: {
+              max: 120,
             },
           },
         }}
