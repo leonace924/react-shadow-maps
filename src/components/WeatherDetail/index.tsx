@@ -50,11 +50,19 @@ const WeatherDetail = () => {
         title="Wind"
         value={<h4 className="text-xl font-medium">{`${gustSpeed} m/s`}</h4>}
       >
-        <ul className="text-base font-medium list-disc list-inside">
-          <li>Wind Gust Speed (m/s) - {gustSpeed}</li>
-          <li>Average Wind Speed (m/s) - {avgSpeed}</li>
-          <li>Average Wind Direction (degrees) - {windDirection}</li>
-          <li>Direction of Maximum 2 Minute Wind Gust (degrees) - {directionGust}</li>
+        <ul className="text-base">
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Wind Gust Speed (m/s) - <strong>{gustSpeed}</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Average Wind Speed (m/s) - <strong>{avgSpeed}</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Average Wind Direction (degrees) - <strong>{windDirection}</strong>
+          </li>
+          <li className="py-2">
+            Direction of Maximum 2 Minute Wind Gust (degrees) - <strong>{directionGust}</strong>
+          </li>
         </ul>
       </DropDownBox>
 
@@ -63,10 +71,16 @@ const WeatherDetail = () => {
         title="Temperature"
         value={<h4 className="text-xl font-medium">{`${avgTemp?.toFixed(2)}°F`}</h4>}
       >
-        <ul className="text-base font-medium list-disc list-inside">
-          <li>Average Temperature (Fahrenheit) - {avgTemp?.toFixed(2)}</li>
-          <li>Maximum Temperature (Fahrenheit) - {maxTemp?.toFixed(2)}</li>
-          <li>Minimum Temperature (Fahrenheit) - {minTemp?.toFixed(2)}</li>
+        <ul className="text-base">
+          <li className="py-2 border-b border-solid border-b-gray-300 ">
+            Average Temperature (Fahrenheit) - <strong>{avgTemp?.toFixed(2)}</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Maximum Temperature (Fahrenheit) - <strong>{maxTemp?.toFixed(2)}</strong>
+          </li>
+          <li className="py-2">
+            Minimum Temperature (Fahrenheit) - <strong>{minTemp?.toFixed(2)}</strong>
+          </li>
         </ul>
       </DropDownBox>
 
@@ -82,32 +96,52 @@ const WeatherDetail = () => {
           </div>
         }
       >
-        <ul className="text-base font-medium list-disc list-inside">
-          <li>
+        <ul className="text-base">
+          <li className="py-2 border-b border-solid border-b-gray-300">
             Day Total Global Horizontal Solar Irradiance (W/m^2) [Clear Sky] -{' '}
-            {totalHorizontalSolar}
+            <strong>{totalHorizontalSolar}</strong>
           </li>
-          <li>Average Solar Radiation - {avgSolarRadiation} W/M^2</li>
-          <li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Average Solar Radiation - <strong>{avgSolarRadiation} W/M^2</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
             Maximum Value of Direct Normal Solar Irradiance in Day (W/m^2) [Clear Sky] -{' '}
-            {maxNormalSolar}
+            <strong>{maxNormalSolar}</strong>
           </li>
-          <li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
             Maximum Value of Global Horizontal Solar Irradiance in Day (W/m^2) [Clear Sky] -{' '}
-            {maxHorizontalSolar}
+            <strong>{maxHorizontalSolar}</strong>
           </li>
-          <li>Average Direct Normal Solar Irradiance (W/m^2) [Clear Sky] - {avgDirectSolar}</li>
-          <li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Average Direct Normal Solar Irradiance (W/m^2) [Clear Sky] -{' '}
+            <strong>{avgDirectSolar}</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
             Maximum Value of Diffuse Horizontal Solar Irradiance in Day (W/m^2) [Clear Sky] -{' '}
-            {maxDiffuseSolar}
+            <strong>{maxDiffuseSolar}</strong>
           </li>
-          <li>Average Global Horizontal Solar Irradiance (W/m^2) - {avgGlobalSolar}</li>
-          <li>Day Total Direct Normal Solar Irradiance (W/m^2) [Clear Sky] - {totalNormalSolar}</li>
-          <li>Total Solar Radiation (W/M^2) - {totalSolar}</li>
-          <li>Sunrise - {sunrise}</li>
-          <li>Sunset - {sunset}</li>
-          <li>Maximum UV Index (0-11+) - {maxUV}</li>
-          <li>Shadows Time - {minsShadow} mins</li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Average Global Horizontal Solar Irradiance (W/m^2) - <strong>{avgGlobalSolar}</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Day Total Direct Normal Solar Irradiance (W/m^2) [Clear Sky] -{' '}
+            <strong>{totalNormalSolar}</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Total Solar Radiation (W/M^2) - <strong>{totalSolar}</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Sunrise - <strong>{sunrise}</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Sunset - <strong>{sunset}</strong>
+          </li>
+          <li className="py-2 border-b border-solid border-b-gray-300">
+            Maximum UV Index (0-11+) - <strong>{maxUV}</strong>
+          </li>
+          <li className="pt-2">
+            Shadows Time - <strong>{minsShadow} mins</strong>
+          </li>
         </ul>
       </DropDownBox>
     </div>

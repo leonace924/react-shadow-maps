@@ -44,7 +44,7 @@ const SearchBar = () => {
           borderRadius: '8px',
           boxShadow: 'none',
         }}
-        placeholder="Search Your Plant Here"
+        placeholder="Search Plant Name"
         items={plantNames}
         // onSearch={handleOnSearch}
         // onHover={handleOnHover}
@@ -81,7 +81,7 @@ const SearchBar = () => {
         </div>
 
         <DatePicker
-          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 rounded-lg block w-full pl-4 p-2.5 bg-white text-base focus-within:outline-none"
           selected={new Date(dayjs(date).toString())}
           onChange={(date) => handleChangeDate(date)}
           minDate={new Date(dayjs(totalData['Last Frost Date']).toString())}
