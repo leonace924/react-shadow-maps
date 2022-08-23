@@ -40,7 +40,11 @@ const SearchBar = () => {
   return (
     <div className="relative z-20 grid items-center grid-cols-3 gap-6 mb-10">
       <ReactSearchAutocomplete
-        placeholder="SEARCH YOUR PLANT HERE"
+        styling={{
+          borderRadius: '8px',
+          boxShadow: 'none',
+        }}
+        placeholder="Search Your Plant Here"
         items={plantNames}
         // onSearch={handleOnSearch}
         // onHover={handleOnHover}
@@ -77,7 +81,7 @@ const SearchBar = () => {
         </div>
 
         <DatePicker
-          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           selected={new Date(dayjs(date).toString())}
           onChange={(date) => handleChangeDate(date)}
           minDate={new Date(dayjs(totalData['Last Frost Date']).toString())}
