@@ -29,10 +29,10 @@ const ShadowChart = () => {
           background
           backgroundPadding={0}
           styles={buildStyles({
-            backgroundColor: '#E7FADA',
-            textColor: '#5DB34C',
-            pathColor: '#5DB34C',
-            trailColor: '#E7FADA',
+            backgroundColor: '#FFEFB6',
+            textColor: '#E2B100',
+            pathColor: '#E2B100',
+            trailColor: '#FFEFB6',
             textSize: '16px',
           })}
         />
