@@ -43,8 +43,8 @@ const MaturityDetail = () => {
         </h3>
 
         <div className="text-xs font-medium text-white lg:text-sm">
-          <p>Last Forst Date: {totalData['Last Frost Date']}</p>
-          <p>First Forst Date: {totalData['First Frost Date']}</p>
+          <p>Last Frost Date: {totalData['Last Frost Date']}</p>
+          <p>First Frost Date: {totalData['First Frost Date']}</p>
         </div>
       </div>
       <div className="max-w-[300px] mx-auto relative">
