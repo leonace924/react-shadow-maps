@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import DatePicker from 'react-datepicker';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { totalData } from 'constant/totalData';
 import { useGlobalStore } from 'store';
 import 'react-datepicker/dist/react-datepicker.css';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
