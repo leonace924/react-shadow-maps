@@ -18,14 +18,6 @@ const MaturityDetail = () => {
 
   const maturityDays = plantInformation?.['Maturity Days (GDD)']['Maturity Days']?.[keyIndex];
 
-  const minDays =
-    plantInformation?.['Maturity Days (GDD)']['Maturity Days'] &&
-    Math.min(...plantInformation?.['Maturity Days (GDD)']?.['Maturity Days']);
-
-  const earliestIndex = plantInformation?.['Maturity Days (GDD)']['Maturity Days'].findIndex(
-    (item) => item === minDays,
-  );
-
   const plantName = totalData['Plant Information']?.find(
     (item: any) => item.Variety === selectedVariety,
   )?.Plant;

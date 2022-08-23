@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
+import DatePicker from 'react-datepicker';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-import { useGlobalStore } from 'store';
 import { totalData } from 'constant/totalData';
+import { useGlobalStore } from 'store';
+import 'react-datepicker/dist/react-datepicker.css';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('America/New_York');
 
 const SearchBar = () => {
   const today = dayjs().format('YYYY-MM-DD');
@@ -20,13 +28,13 @@ const SearchBar = () => {
     return { id: index, name: item.Variety };
   });
 
-  const handleChangeDate = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newDate = dayjs(event.target.value).format('YYYY-MM-DD');
+  const handleChangeDate = (date: Date | null) => {
+    const newDate = dayjs(date).format('YYYY-MM-DD');
     setDate(newDate);
   };
 
   useEffect(() => {
-    setSelectedDate(date);
+    setSelectedDate(dayjs(date).format('YYYY-MM-DD'));
   }, [date, setSelectedDate]);
 
   return (
@@ -68,12 +76,13 @@ const SearchBar = () => {
           </svg>
         </div>
 
-        <input
-          type="date"
+        <DatePicker
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Select date"
-          value={date}
-          onChange={(e) => handleChangeDate(e)}
+          selected={new Date(dayjs(date).toString())}
+          onChange={(date) => handleChangeDate(date)}
+          minDate={new Date(dayjs(totalData['Last Frost Date']).toString())}
+          maxDate={new Date(dayjs(totalData['First Frost Date']).toString())}
+          placeholderText="Select date"
         />
       </div>
     </div>
