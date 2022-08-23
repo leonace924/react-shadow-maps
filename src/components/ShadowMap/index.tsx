@@ -355,7 +355,7 @@ const ShadowMap = () => {
 
   return (
     <div className="w-full h-full">
-      <div ref={mapElement} className="w-full h-full map" />
+      <div ref={mapElement} className="w-full h-full cursor-pin" />
     </div>
   );
 };
