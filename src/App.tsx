@@ -21,7 +21,7 @@ const App = () => {
             <ShadowMap />
           </div>
 
-          <div className="bg-[#949186F7] p-8 rounded-md">
+          <div className="bg-[#7E8B86] p-8 rounded-md">
             <MaturityDetail />
             <div className="mt-3">
               <LineChart />

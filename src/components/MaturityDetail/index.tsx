@@ -25,7 +25,6 @@ const MaturityDetail = () => {
   const earliestIndex = plantInformation?.['Maturity Days (GDD)']['Maturity Days'].findIndex(
     (item) => item === minDays,
   );
-  const earliestDate = plantInformation?.['Maturity Days (GDD)'].Date[earliestIndex ?? 0];
 
   const plantName = totalData['Plant Information']?.find(
     (item: any) => item.Variety === selectedVariety,
@@ -74,7 +73,7 @@ const MaturityDetail = () => {
                 <div className="text-sm">
                   <span className="text-gray-500">First Harvest Date:</span>
                   <span className="block">
-                    <strong>{dayjs(earliestDate).format('MMMM D')}</strong>
+                    <strong>{dayjs(selectedDate).add(maturityDays, 'day').format('MMMM D')}</strong>
                   </span>
                 </div>
               </>
