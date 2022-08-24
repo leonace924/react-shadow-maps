@@ -33,7 +33,7 @@ const MaturityDetail = () => {
           <strong>{plantName}</strong> ({selectedVariety})
         </h3>
 
-        <div className="text-xs font-medium text-white lg:text-sm">
+        <div className="text-xs font-medium text-right text-white lg:text-sm">
           <p>Last Spring Frost: {totalData['Last Frost Date']}</p>
           <p>First Fall Frost: {totalData['First Frost Date']}</p>
         </div>
