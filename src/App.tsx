@@ -21,7 +21,7 @@ const App = () => {
             </div>
           </div>
 
-          <div className="relative w-full h-[500px] rounded-md overflow-hidden">
+          <div className="relative w-full h-[500px] rounded-sm overflow-hidden">
             <div className="absolute z-30 px-5 py-3 bg-white rounded-lg right-5 top-5">
               <ShadowChart />
             </div>

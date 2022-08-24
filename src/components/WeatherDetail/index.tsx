@@ -79,7 +79,7 @@ const WeatherDetail = () => {
             Maximum Temperature (Fahrenheit) - <strong>{maxTemp?.toFixed(1)}</strong>
           </li>
           <li className="py-2">
-            Minimum Temperature (Fahrenheit) - <strong>{minTemp?.toFixed(2)}</strong>
+            Minimum Temperature (Fahrenheit) - <strong>{minTemp?.toFixed(1)}</strong>
           </li>
         </ul>
       </DropDownBox>
