@@ -5,6 +5,7 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import ImageLayer from 'ol/layer/Image';
 import RasterSource from 'ol/source/Raster';
+
 import OSM from 'ol/source/OSM';
 import { transform, toLonLat } from 'ol/proj';
 import { createXYZ } from 'ol/tilegrid';
@@ -14,6 +15,19 @@ import { monthsData } from 'constant/months';
 import 'ol/ol.css';
 
 const ShadowMap = () => {
+  const north = 40.776381784828956;
+  const west = -74.00390625;
+  const south = 40.74725696280421;
+  const east = -73.9599609375;
+
+  let newlonLat = transform([west, north], 'EPSG:4326', 'EPSG:3857');
+  const west_3857 = newlonLat[0];
+  const north_3857 = newlonLat[1];
+
+  newlonLat = transform([east, south], 'EPSG:4326', 'EPSG:3857');
+  const east_3857 = newlonLat[0];
+  const south_3857 = newlonLat[1];
+
   const initialMap = new Map({
     layers: [
       new TileLayer({
@@ -24,6 +38,7 @@ const ShadowMap = () => {
       center: transform([-73.981934, 40.761821], 'EPSG:4326', 'EPSG:3857'),
       zoom: 15,
       minZoom: 15,
+      extent: [west_3857, south_3857, east_3857, north_3857], // restrict the extent following the four coordinates
       // maxZoom: 15,
     }),
   });
