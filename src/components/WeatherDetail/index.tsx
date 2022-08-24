@@ -69,14 +69,14 @@ const WeatherDetail = () => {
       <DropDownBox
         iconName="hot"
         title="Temperature"
-        value={<h4 className="text-xl font-medium">{`${avgTemp?.toFixed(2)}°F`}</h4>}
+        value={<h4 className="text-xl font-medium">{`${avgTemp?.toFixed(1)}°F`}</h4>}
       >
         <ul className="text-base">
           <li className="py-2 border-b border-solid border-b-gray-300 ">
-            Average Temperature (Fahrenheit) - <strong>{avgTemp?.toFixed(2)}</strong>
+            Average Temperature (Fahrenheit) - <strong>{avgTemp?.toFixed(1)}</strong>
           </li>
           <li className="py-2 border-b border-solid border-b-gray-300">
-            Maximum Temperature (Fahrenheit) - <strong>{maxTemp?.toFixed(2)}</strong>
+            Maximum Temperature (Fahrenheit) - <strong>{maxTemp?.toFixed(1)}</strong>
           </li>
           <li className="py-2">
             Minimum Temperature (Fahrenheit) - <strong>{minTemp?.toFixed(2)}</strong>
