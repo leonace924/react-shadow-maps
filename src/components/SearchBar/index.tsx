@@ -45,6 +45,13 @@ const SearchBar = () => {
       height: '46px',
       borderRadius: '8px',
     }),
+    option: (provided: any, state: any) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#94A8A0' : '',
+      ':hover': {
+        backgroundColor: '#C6D6CF',
+      },
+    }),
   };
   const handleChangeDate = (date: Date | null) => {
     const newDate = dayjs(date).format('YYYY-MM-DD');
