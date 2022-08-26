@@ -3,14 +3,25 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import DatePicker from 'react-datepicker';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+import Select, { components } from 'react-select';
+import Icon from 'components/Icons';
 import { totalData } from 'constant/totalData';
 import { useGlobalStore } from 'store';
 import 'react-datepicker/dist/react-datepicker.css';
+import styles from './styles.module.css';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault('America/New_York');
+
+const Control = ({ children, ...props }: any) => (
+  <components.Control {...props}>
+    <span className={styles.searchBarIcon}>
+      <Icon type="search" />
+    </span>{' '}
+    {children}
+  </components.Control>
+);
 
 const SearchBar = () => {
   const today = dayjs().format('YYYY-MM-DD');
@@ -24,10 +35,17 @@ const SearchBar = () => {
     setVariety('Buttercrunch Lettuce');
   }, []);
 
-  const plantNames = totalData['Plant Information'].map((item, index) => {
-    return { id: index, name: item.Variety };
+  const plantNameOptions = totalData['Plant Information'].map((item) => {
+    return { label: item.Variety, value: item.Variety };
   });
 
+  const customSTyles = {
+    control: (styles: any) => ({
+      ...styles,
+      height: '46px',
+      borderRadius: '8px',
+    }),
+  };
   const handleChangeDate = (date: Date | null) => {
     const newDate = dayjs(date).format('YYYY-MM-DD');
     setDate(newDate);
@@ -39,21 +57,13 @@ const SearchBar = () => {
 
   return (
     <div className="relative z-20 grid items-center grid-cols-3 gap-6 mb-10">
-      <ReactSearchAutocomplete
-        styling={{
-          borderRadius: '8px',
-          boxShadow: 'none',
-        }}
+      <Select
+        defaultValue={{ value: 'Buttercrunch Lettuce', label: 'Buttercrunch Lettuce' }}
+        options={plantNameOptions}
+        components={{ Control, IndicatorSeparator: () => null }}
         placeholder="Search Plant Name"
-        items={plantNames}
-        // onSearch={handleOnSearch}
-        // onHover={handleOnHover}
-        // onFocus={handleOnFocus}
-        // formatResult={formatResult}
-        onSelect={(item) => {
-          setVariety(item.name);
-        }}
-        autoFocus
+        styles={customSTyles}
+        onChange={(newValue) => setVariety(newValue?.value ?? '')}
       />
 
       <div className="ml-8 text-center">

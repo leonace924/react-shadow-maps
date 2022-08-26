@@ -1,0 +1,6 @@
+.searchBarIcon {
+  @apply pl-3;
+}
+.searchBarIcon svg {
+  @apply w-4 h-4;
+}
